@@ -84,14 +84,8 @@ mvnw.cmd spring-boot:run
 * Role-based access control (Admin/User)
 * Secured endpoints using Spring Security
 
-## Notes
-
-* Do not commit sensitive data such as database credentials or secret keys
-* Use environment variables or external configuration for secrets
-
 ## Future Improvements
 
-* Add frontend (React/Angular)
 * Add Docker support
 * Improve validation and error handling
 * Add reporting and analytics
