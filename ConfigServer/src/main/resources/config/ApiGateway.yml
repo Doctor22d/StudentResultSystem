@@ -1,0 +1,56 @@
+spring:
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+
+            - id: AUTH_USER_LOGIN
+              uri: lb://AUTH
+              predicates:
+                - Path=/api/user/login
+                - Method=POST
+
+            - id: AUTH_ADMIN_LOGIN
+              uri: lb://AUTH
+              predicates:
+                - Path=/api/admin/login
+                - Method=POST
+
+
+            - id: USER_ADMIN_USER
+              uri: lb://user-admin
+              predicates:
+                - Path=/api/user/**
+
+            - id: USER_ADMIN_ADMIN
+              uri: lb://user-admin
+              predicates:
+                - Path=/api/admin/**
+
+
+            - id: UPLOAD_RESULT
+              uri: lb://upload-result
+              predicates:
+                - Path=/api/result/**
+
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+
+server:
+  port: 8080
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    prefer-ip-address: true
+
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
